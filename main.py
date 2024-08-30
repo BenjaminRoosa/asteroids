@@ -11,16 +11,22 @@ def main():
     print("Starting asteroids!")
     print(f"Screen width: {SCREEN_WIDTH}")
     print(f"Screen height: {SCREEN_HEIGHT}")
-    
+    updateable = pygame.sprite.Group()
+    drawable = pygame.sprite.Group()
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
-    player_obj = Player(x= SCREEN_WIDTH/2, y= SCREEN_HEIGHT/2)
+    Player(updateable, drawable, x= SCREEN_WIDTH/2, y= SCREEN_HEIGHT/2)
+    
     while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 return
         screen.fill(000)
-        player_obj.update(dt)
-        player_obj.draw(screen)
+        for thing in updateable:
+            thing.update(dt)
+        for thing in drawable:
+            thing.draw(screen)
+            
+        
         pygame.display.flip()
         
         dt = (clock.tick(FRAME_RATE))/1000 

@@ -3,10 +3,13 @@ from circleshape import CircleShape
 from constants import PLAYER_RADIUS, PLAYER_TURN_SPEED, PLAYER_SPEED
 
 class Player(CircleShape):
-    def __init__(self, x, y, radius= PLAYER_RADIUS):
+    def __init__(self, group_a , group_b, x, y, radius= PLAYER_RADIUS):
         super().__init__(x, y, radius)
         
         self.rotation = 0
+        self.containers = (group_a, group_b)
+        for group in self.containers:
+            group.add(self)
     
     # in the player class
     def triangle(self):
